@@ -3,6 +3,7 @@ package org.wordpress.android.ui.sitecreation;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -110,7 +111,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
         super();
         ((WordPress) context.getApplicationContext()).component().inject(this);
 
-        // Stable IDs so the edittext doesn't lose focus on refresh
+        // Stable IDs so the EditText doesn't lose focus on refresh
         setHasStableIds(true);
 
         mInitialKeywords = initialKeywords;
@@ -136,7 +137,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public @NonNull RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_HEADER:
                 return new HeaderViewHolder(LayoutInflater.from(parent.getContext())
@@ -156,7 +157,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
-    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+    public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
 
         if (holder instanceof InputViewHolder) {
@@ -165,7 +166,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
 
         if (holder instanceof InputViewHolder) {
@@ -174,7 +175,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
 
         switch (viewType) {

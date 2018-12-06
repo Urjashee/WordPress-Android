@@ -2,6 +2,7 @@ package org.wordpress.android.ui.sitecreation;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +25,7 @@ import org.wordpress.android.ui.sitecreation.NewSiteCreationDomainLoaderFragment
 import org.wordpress.android.util.ActivityUtils;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -68,7 +70,7 @@ public class NewSiteCreationDomainFragment extends NewSiteCreationBaseFormFragme
     @Override
     protected void setupContent(ViewGroup rootView) {
         // important for accessibility - talkback
-        getActivity().setTitle(R.string.site_creation_domain_selection_title);
+        Objects.requireNonNull(getActivity()).setTitle(R.string.site_creation_domain_selection_title);
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mSiteCreationDomainAdapter);
@@ -105,7 +107,7 @@ public class NewSiteCreationDomainFragment extends NewSiteCreationBaseFormFragme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((WordPress) getActivity().getApplication()).component().inject(this);
+        ((WordPress) Objects.requireNonNull(getActivity()).getApplication()).component().inject(this);
 
         if (getArguments() != null) {
             mSiteTitle = getArguments().getString(ARG_SITE_TITLE);
@@ -153,7 +155,7 @@ public class NewSiteCreationDomainFragment extends NewSiteCreationBaseFormFragme
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putString(KEY_QUERY_STRING, mQueryString);
@@ -180,7 +182,7 @@ public class NewSiteCreationDomainFragment extends NewSiteCreationBaseFormFragme
         if (mSiteCreationDomainAdapter == null) {
             // Fragment is initializing or rotating so, just instantiate a new adapter.
             mSiteCreationDomainAdapter = new NewSiteCreationDomainAdapter(
-                    getContext(), mKeywords,
+                    Objects.requireNonNull(getContext()), mKeywords,
                     new NewSiteCreationDomainAdapter.OnAdapterListener() {
                         @Override
                         public void onKeywordsChange(String keywords) {
