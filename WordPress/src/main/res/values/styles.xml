@@ -757,4 +757,20 @@
         <item name="android:enabled">false</item>
     </style>
 
+    <style name="NewSiteCreationHeaderTextBase">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxWidth">@dimen/new_site_creation_tablet_max_text_width</item>
+        <item name="android:textSize">@dimen/text_sz_large</item>
+    </style>
+
+    <style name="NewSiteCreationHeaderTitle" parent="NewSiteCreationHeaderTextBase">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/wp_grey_dark</item>
+    </style>
+
+    <style name="NewSiteCreationHeaderSubtitle" parent="NewSiteCreationHeaderTextBase">
+        <item name="android:layout_marginTop">@dimen/margin_medium</item>
+        <item name="android:textColor">@color/wp_grey_darken_20</item>
+    </style>
 </resources>

@@ -3,28 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/grey_lighten_30"
-    android:clipChildren="false"
-    android:focusable="true"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingTop="@dimen/margin_extra_large">
+    android:paddingBottom="@dimen/margin_extra_medium_large"
+    android:paddingEnd="@dimen/margin_extra_large"
+    android:paddingStart="@dimen/margin_extra_large"
+    android:paddingTop="@dimen/margin_extra_medium_large">
 
     <TextView
-        android:id="@+id/label_title"
-        style="@style/SiteCreation.Heading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/margin_extra_large"
-        android:paddingStart="@dimen/margin_extra_large"
-        android:text="@string/site_creation_label_domain_selection_title"/>
+        android:id="@+id/site_info_header_title"
+        style="@style/NewSiteCreationHeaderTitle"
+        android:text="@string/new_site_creation_domain_header_title"/>
 
     <TextView
-        android:id="@+id/label"
-        style="@style/LoginTheme.TextLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_extra_large"
-        android:paddingEnd="@dimen/margin_extra_large"
-        android:paddingStart="@dimen/margin_extra_large"
-        android:text="@string/site_creation_label_domain_selection"/>
+        android:id="@+id/site_info_header_subtitle"
+        style="@style/NewSiteCreationHeaderSubtitle"
+        android:text="@string/new_site_creation_domain_header_subtitle"/>
 </LinearLayout>
