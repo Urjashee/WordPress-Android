@@ -11,12 +11,10 @@
     android:paddingTop="@dimen/margin_extra_medium_large">
 
     <TextView
-        android:id="@+id/site_info_header_title"
         style="@style/NewSiteCreationHeaderTitle"
         android:text="@string/new_site_creation_domain_header_title"/>
 
     <TextView
-        android:id="@+id/site_info_header_subtitle"
         style="@style/NewSiteCreationHeaderSubtitle"
         android:text="@string/new_site_creation_domain_header_subtitle"/>
 </LinearLayout>

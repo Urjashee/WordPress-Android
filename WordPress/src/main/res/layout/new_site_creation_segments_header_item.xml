@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="@dimen/site_creation_segments_content_padding_vertical"
     android:paddingEnd="@dimen/site_creation_segments_content_padding_horizontal"
@@ -13,21 +13,11 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:textColor="@color/wp_grey_dark"
-        android:textSize="@dimen/text_sz_large"
+        style="@style/NewSiteCreationHeaderTitle"
         tools:text="Tell us what kind of site you'd like to make"/>
 
     <TextView
         android:id="@+id/subtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:gravity="center"
-        android:textColor="@color/wp_grey_darken_20"
-        android:textSize="@dimen/text_sz_medium"
+        style="@style/NewSiteCreationHeaderSubtitle"
         tools:text="This helps us make recommendations. But you're never locked in - all sites evolve!"/>
 </LinearLayout>

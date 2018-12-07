@@ -762,6 +762,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxWidth">@dimen/new_site_creation_tablet_max_text_width</item>
         <item name="android:textSize">@dimen/text_sz_large</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="NewSiteCreationHeaderTitle" parent="NewSiteCreationHeaderTextBase">
