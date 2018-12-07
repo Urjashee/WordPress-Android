@@ -1,16 +1,20 @@
 package org.wordpress.android.ui.sitecreation;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -56,18 +60,33 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
         private final EditText mInput;
         private final TextWatcher mTextWatcher;
         private final View mProgressBar;
+        private final View mClearAllLayout;
 
         private boolean mIsDetached;
         private boolean mKeepFocus;
 
         private InputViewHolder(View itemView) {
             super(itemView);
-            this.mInput = itemView.findViewById(R.id.input);
-            this.mInput.setCompoundDrawablesRelativeWithIntrinsicBounds(AppCompatResources.getDrawable(
-                    itemView.getContext(), R.drawable.ic_search_grey_24dp), null, null, null);
-            this.mProgressBar = itemView.findViewById(R.id.progress_bar);
+            Context context = itemView.getContext();
+            mInput = itemView.findViewById(R.id.input);
+            mInput.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    AppCompatResources.getDrawable(context, R.drawable.ic_search_grey_24dp), null, null, null);
+            mProgressBar = itemView.findViewById(R.id.progress_bar);
+            View clearAllButton = itemView.findViewById(R.id.clear_all_btn);
+            Drawable drawable = AppCompatResources.getDrawable(context, R.drawable.ic_close_white_24dp);
+            if (drawable != null) {
+                drawable.setTint(ContextCompat.getColor(context, R.color.grey));
+                clearAllButton.setBackground(drawable);
+            }
+            mClearAllLayout = itemView.findViewById(R.id.clear_all_layout);
+            mClearAllLayout.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setText("");
+                }
+            });
 
-            this.mTextWatcher = new TextWatcher() {
+            mTextWatcher = new TextWatcher() {
                 private Debouncer mDebouncer = new Debouncer();
 
                 @Override
@@ -81,6 +100,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
                 @Override
                 public void afterTextChanged(final Editable editable) {
                     final String text = editable.toString();
+                    textChanged(text);
                     mDebouncer.debounce(Void.class, new Runnable() {
                         @Override
                         public void run() {
@@ -95,6 +115,17 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
                     }, GET_SUGGESTIONS_INTERVAL_MS, TimeUnit.MILLISECONDS);
                 }
             };
+        }
+
+        public void setText(String text) {
+            if (text != null) {
+                mInput.setText(text);
+            }
+            textChanged(text);
+        }
+
+        private void textChanged(String text) {
+            mClearAllLayout.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -145,7 +176,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
                                                                    false));
             case VIEW_TYPE_INPUT:
                 return new InputViewHolder(LayoutInflater.from(parent.getContext())
-                                                         .inflate(R.layout.new_site_creation_domain_input, parent,
+                                                         .inflate(R.layout.new_site_creation_search_input_item, parent,
                                                                  false));
             case VIEW_TYPE_ITEM:
                 return new DomainViewHolder(LayoutInflater.from(parent.getContext())
@@ -199,7 +230,7 @@ public class NewSiteCreationDomainAdapter extends RecyclerView.Adapter<RecyclerV
             inputViewHolder.mInput.requestFocus();
         }
         if (mInitialKeywords != null) {
-            inputViewHolder.mInput.setText(mInitialKeywords);
+            inputViewHolder.setText(mInitialKeywords);
             mInitialKeywords = null;
         }
         inputViewHolder.mInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
